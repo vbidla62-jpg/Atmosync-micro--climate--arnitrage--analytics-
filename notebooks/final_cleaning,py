@@ -1,0 +1,13 @@
+import pandas as pd
+df = pd.read_csv('data/iot_sensor_data.csv')
+print(f"Original: {df.shape}")
+df_cleaned = df.dropna().drop_duplicates()
+df_cleaned['timestamp'] = pd.to_datetime(df_cleaned['timestamp'])
+df_cleaned['hour'] = df_cleaned['timestamp'].dt.hour
+if 'location' in df_cleaned.columns:
+    pivot = df_cleaned.pivot_table(index='timestamp', columns='location', values='temperature')
+    pivot['temp_delta'] = pivot.max(axis=1) - pivot.min(axis=1)
+    print(pivot.head())
+    pivot.to_csv('data/arbitrage_report.csv')
+df_cleaned.to_csv('data/iot_sensor_data_cleaned.csv', index=False)
+print(f"Cleaned: {df_cleaned.shape}")
