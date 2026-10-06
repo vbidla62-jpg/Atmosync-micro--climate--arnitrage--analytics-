@@ -6,3 +6,7 @@ Power BI dashboard for cold chain monitoring.
 - Built initial dashboard layout
 - Added cold chain monitoring visuals
 - Work in progress for final submission
+## 6 Oct Update
+- Created DAX measures for avg temperature and humidity variance
+- Added data modeling for sensor data
+- Improved visuals for cold storage monitoring
